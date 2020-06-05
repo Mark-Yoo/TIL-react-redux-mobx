@@ -3,20 +3,20 @@ const { createStore } = require("redux");
 const reducer = (prevState, action) => {
   // 새로운 state를 만들어야 하기 때문에 return이 없으면 문제가 생긴다.
   switch (action.type) {
-    case "CHANGE_COMP_A":
+    case "LOG_IN":
       return {
         ...prevState,
-        compA: action.data,
+        user: action.data,
       };
-    case "CHANGE_COMP_B":
+    case "ADD_POST":
       return {
         ...prevState,
-        compB: action.data,
+        posts: [...prevState.posts, action.data],
       };
-    case "CHANGE_COMP_C":
+    case "LOG_OUT":
       return {
         ...prevState,
-        compC: action.data,
+        user: null,
       };
     // 행여나 action.type에서 오타가 나는 등의 문제가 생기면 return이 없어서 에러가 발생할 수 있으므로 default에서는 이 상황에서 return 해 줄 것이 필요하다.
     default:
@@ -24,9 +24,8 @@ const reducer = (prevState, action) => {
   }
 };
 const initialState = {
-  compA: "a",
-  compB: 12,
-  compC: null,
+  user: null,
+  posts: [],
 };
 
 const store = createStore(reducer, initialState);
@@ -44,18 +43,58 @@ console.log("1st", store.getState());
 // };
 
 // 위의 함수를 조금 더 유동적으로 리팩토링
-const changeCompA = (data) => {
+const logIn = (data) => {
   return {
-    type: "CHANGE_COMP_A",
+    type: "LOG_IN",
     data,
   };
 };
+
+const logOut = () => {
+  return {
+    type: "LOG_OUT",
+  };
+};
+
+const addPost = (data) => {
+  return {
+    type: "ADD_POST",
+    data,
+  };
+};
+
+store.dispatch(logIn());
 
 //store.dispatch({
 // type: 'CHANGE_COMP_A',
 // data: 'b',
 //});
 
-store.dispatch(changeCompA("c"));
-
+store.dispatch(
+  logIn({
+    name: "markYoo",
+    admin: true,
+  })
+);
 console.log("2nd", store.getState());
+
+store.dispatch(
+  addPost({
+    userId: 1,
+    id: 1,
+    content: "배워보자 redux",
+  })
+);
+store.dispatch(
+  addPost({
+    userId: 1,
+    id: 2,
+    content: "배워보자 mobx",
+  })
+);
+
+console.log("3rd", store.getState());
+
+store.dispatch(logOut());
+
+console.log("4th", store.getState());
