@@ -1,10 +1,9 @@
-const postReducer = (prevState, action) => {
+const initialState = [];
+
+const postReducer = (prevState = initialState, action) => {
   switch (action.type) {
     case "ADD_POST":
-      return {
-        ...prevState,
-        posts: [...prevState.posts, action.data],
-      };
+      return [...prevState, action.data];
     default:
       return prevState;
   }
