@@ -5,7 +5,7 @@ const { addPost } = require("./actions/post");
 
 const initialState = {
   user: {
-    isLoggingIn: true,
+    isLoggingIn: false,
     data: null,
   },
   posts: [],
@@ -33,7 +33,13 @@ const thunkMiddleware = (store) => (dispatch) => (action) => {
 };
 
 // compose는 합성하는 함수
-const enhancer = compose(applyMiddleware(firstMiddleware, thunkMiddleware));
+const enhancer = compose(
+  applyMiddleware(firstMiddleware, thunkMiddleware),
+  typeof window === "object" &&
+    typeof window.__REDUX_DEVTOOLS_EXTENSION__ !== "undefined"
+    ? window.__REDUX_DEVTOOLS_EXTENSION__()
+    : (f) => f
+);
 
 const store = createStore(reducer, initialState, enhancer);
 

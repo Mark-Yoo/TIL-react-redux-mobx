@@ -3,9 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 const { logIn } = require('./actions/user');
 
 const App = () => {
-  const user = useSelector(() => {});
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
-
   const onClick = useCallback(
     () => {
       dispatch(logIn({
@@ -16,7 +15,8 @@ const App = () => {
   )
   return (
     <div>
-      <button onClick={onClick}>로그인</button>
+      {user.isLoggingIn ? <div>로그인 중</div> : user.data ? <div>{user.data.nickname}</div> : '로그인 해주세요'}
+      {!user.data && <button onClick={onClick}>로그인</button>}
     </div>
   );
 };
