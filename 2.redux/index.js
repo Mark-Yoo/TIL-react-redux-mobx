@@ -16,6 +16,8 @@ const initialState = {
   followers: [],
 };
 
+const enhancer = compose(applyMiddleware(), devtool);
+
 const store = createStore(reducer, initialState);
 store.subscribe(() => {
   console.log("changed");
