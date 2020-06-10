@@ -13,6 +13,7 @@ const logIn = (data) => {
           })
         );
       }, 2000);
+      // axios.post().then().catch()로 이후에 대체 할 예정(redux에 비동기 액션이 없으므로 setTimeout 비동기 함수를 이용했음)
     } catch (e) {
       dispatch(logInFailure(e));
     }
