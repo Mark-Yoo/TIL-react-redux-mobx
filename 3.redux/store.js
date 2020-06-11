@@ -1,5 +1,5 @@
 const { createStore, applyMiddleware } = require("redux");
-const { composeWithDevtools } = require("redux-devtools-extension");
+const { composeWithDevTools } = require("redux-devtools-extension");
 
 const reducer = require("./reducers/index");
 const { logIn, logOut } = require("./actions/user");
@@ -38,7 +38,7 @@ const thunkMiddleware = (store) => (dispatch) => (action) => {
 const enhancer =
   process.env.NODE_ENV === "production"
     ? compose(applyMiddleware(firstMiddleware, thunkMiddleware))
-    : composeWithDevtools(applyMiddleware(firstMiddleware, thunkMiddleware));
+    : composeWithDevTools(applyMiddleware(firstMiddleware, thunkMiddleware));
 
 const store = createStore(reducer, initialState, enhancer);
 
