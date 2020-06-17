@@ -1,4 +1,7 @@
-const { observable } = require("mobx");
+import { observable, configure } from "mobx";
+
+// mobx 엄격 모드 - 자유로운 mobx에 제한을 두기 위한 방법
+configure({ enforceActions: "always" });
 
 const userStore = observable({
   isLoggingIn: false,

@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react';
 import { useObserver, useLocalStore } from 'mobx-react';
+import { action } from 'mobx';
 
 import { userStore, postStore } from './store';
 
@@ -7,12 +8,12 @@ const App = () => {
   const state = useLocalStore(() => ({
     name: '',
     password: '',
-    onChangeName(e) {
-      this.name = e.target.value;
-    },
-    onChangePassword(e) {
-      this.password = e.target.value;
-    }
+    onChangeName: action((e) => {
+      state.name = e.target.value;
+    }),
+    onChangePassword: action((e) => {
+      state.password = e.target.value;
+    })
   }))
 
   const onLogIn = useCallback(() => {
@@ -38,12 +39,8 @@ const App = () => {
         : <button onClick={onLogOut}>로그아웃</button>}
       <div>{postStore.data.length}</div>
       <div>
-        <input value={state.name} onChange={(e) => {
-          state.name = e.target.value;
-        }} />
-        <input value={state.password} type="password" onChange={(e) => {
-          state.password = e.target.value;
-        }}  />
+        <input value={state.name} onChange={state.onChangeName} />
+        <input value={state.password} type="password" onChange={state.onChangePassword}  />
       </div>
     </div>
   ));
