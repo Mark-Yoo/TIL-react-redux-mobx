@@ -38,11 +38,11 @@ const App = () => {
         : <button onClick={onLogOut}>로그아웃</button>}
       <div>{postStore.data.length}</div>
       <div>
-        <input value={this.state.name} onChange={(e) => {
-          this.state.name = e.target.value;
+        <input value={state.name} onChange={(e) => {
+          state.name = e.target.value;
         }} />
-        <input value={this.state.password} type="password" onChange={(e) => {
-          this.state.password = e.target.value;
+        <input value={state.password} type="password" onChange={(e) => {
+          state.password = e.target.value;
         }}  />
       </div>
     </div>
