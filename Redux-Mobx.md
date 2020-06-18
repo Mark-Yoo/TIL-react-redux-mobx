@@ -55,3 +55,14 @@ Reducer는 action을 dispatch 받아서 새로운 상태를 만들어준다. (�
 - mobx의 state는 observable이라고 하는 객체로 감싸져있고, 이 객체가 action이 발생하였을 때 observer에 상태가 바뀌었다고 알려주는 형태로 되어있다.
 
 - Flux 패턴은 양방향 패턴에서 생기는 수많은 버그들을 해결하기 위해 만들어지 패턴이다.
+
+- Redux는 부모 자식 관계의 컴포넌트 사이에서 상태를 전달해야 하는 상황에서 생기는 문제점을 해결하기 위해서 나온 것.
+
+- autorun과 reaction은 둘 다 감지기 역할을 한다. 
+- autorun은 무엇이든 상태가 바뀌면 모두 감지한다.
+- reaction은 첫번째 인수에서 return하는 값이 바뀌었을 때에만 실행 된다.
+- 리덕스에서 한 번에 2가지의 동작을 실행하는 액션을 만들 수가 없지만 mobx에서는 임의로 이러한 액션을 만드는 것이 가능하다.
+
+- mobx에서 observer는 데코레이터로도 사용할 수 있다. (아직 experimental stage 이므로 언제든 바뀔 수 있다.)
+
+- mobx에서는 사용방법이 너무 자유로워 strict 모드인 configure를 사용할 수 있는데, 이 때 상태를 바꾸는 함수에 action을 붙여준다.
