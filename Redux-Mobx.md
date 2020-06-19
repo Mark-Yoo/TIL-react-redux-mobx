@@ -66,3 +66,4 @@ Reducer는 action을 dispatch 받아서 새로운 상태를 만들어준다. (�
 - mobx에서 observer는 데코레이터로도 사용할 수 있다. (아직 experimental stage 이므로 언제든 바뀔 수 있다.)
 
 - mobx에서는 사용방법이 너무 자유로워 strict 모드인 configure를 사용할 수 있는데, 이 때 상태를 바꾸는 함수에 action을 붙여준다.
+- observable로 사용하는 상태는 구조분해할당을 하면 observable이 깨져버리므로 조심할 것
